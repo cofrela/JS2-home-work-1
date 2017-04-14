@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>menu</title> 
+</head>
+<body>
+
+<!--
+    <div id = "menu-id">
+        <h2>Меню</h2>
+        <ul class="menu-class">
+            <li><a href="#" title="main">Главная</a></li>
+            <li><a href="#" title="catalog">Каталог</a></li>
+            <li><a href="#" title="contacts">Контакты</a></li>
+        </ul>
+    </div>
+-->
+
+    <script>
+    var mainArray = [
+            {title: "main", href: "#main"},
+            {title: "catalog", href: "#catalog"},
+            {title: "contacts", href: "#contacts"}
+        ]  
+        
+    function Menu(inputArray) {
+        this._inputArray = inputArray;
+        this.menuId = "menu-id";
+        this.menuClass = "menu-class";
+        
+        this.render = function() {
+            var div = document.createElement('div');
+            var h2 = document.createElement('h2');
+            h2.innerHTML = "Меню";
+            div.appendChild(h2);
+            count = inputArray.length;
+            var ul = document.createElement('ul');
+            for (var i = 0; i < count; i++) {
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                a.href = inputArray[i].href;
+                a.title = inputArray[i].title;
+                a.innerHTML = "Пункт" + ( i+ 1);
+                
+                li.appendChild(a);
+                ul.appendChild(li);
+            }
+            div.appendChild(ul);
+            
+            div.setAttribute('id', this.menuId);
+            ul.setAttribute('class', this.menuClass);
+            
+            return div;
+            }
+        }
+        
+        // Наследование
+        function SubMenu (inputArray) {
+            Menu.call(this, inputArray);
+        }
+     
+        var mainMenu = new Menu(mainArray);
+        document.body.appendChild(mainMenu.render());
+        
+        var subMenu = new subMenu(mainArray);
+        document.body.appendChild(subMenu.render());
+        
+    </script>
+
+</body>
+</html>
+
